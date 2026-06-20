@@ -58,11 +58,34 @@ const projects = [
   },
 ];
 
-const stack: Record<string, string[]> = {
-  Frontend: ["React", "TypeScript", "Tailwind", "Vite"],
-  Backend: ["Python", "FastAPI", "Node.js", "Express"],
-  Data: ["PostgreSQL", "MongoDB", "Redis", "Cloudinary"],
-  Tooling: ["Git", "Docker", "VS Code", "Linux"],
+const stack: Record<string, { name: string; badge: string }[]> = {
+  Frontend: [
+    { name: "React", badge: "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" },
+    { name: "JavaScript", badge: "https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" },
+    { name: "HTML5", badge: "https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" },
+    { name: "CSS3", badge: "https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" },
+  ],
+  Backend: [
+    { name: "Python", badge: "https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" },
+    { name: "Express.js", badge: "https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" },
+    { name: "Node.js", badge: "https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" },
+    { name: "FastAPI", badge: "https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" },
+  ],
+  "Databases & Storage": [
+    { name: "PostgreSQL", badge: "https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" },
+    { name: "MongoDB", badge: "https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" },
+    { name: "Redis", badge: "https://img.shields.io/badge/Redis-FF4438?style=for-the-badge&logo=redis&logoColor=white" },
+  ],
+  "Cloud & Tools": [
+    { name: "Cloudinary", badge: "https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" },
+    { name: "Git", badge: "https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" },
+    { name: "GitHub", badge: "https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" },
+    { name: "VS Code", badge: "https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" },
+  ],
+  Interests: [
+    { name: "AI / ML", badge: "https://img.shields.io/badge/AI%2FML-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" },
+    { name: "Web Dev", badge: "https://img.shields.io/badge/Web%20Dev-6EE7F7?style=for-the-badge&logo=vercel&logoColor=black" },
+  ],
 };
 
 function Index() {
@@ -206,19 +229,23 @@ function Index() {
         {/* Stack */}
         <section id="stack" className="py-20 border-t border-border">
           <SectionHeader index="02" label="Stack" title="Tools I work with" />
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
             {Object.entries(stack).map(([group, items]) => (
               <div key={group}>
                 <h3 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground border-b border-border pb-3">
                   {group}
                 </h3>
-                <ul className="mt-4 space-y-2.5">
+                <div className="mt-4 flex flex-wrap gap-2">
                   {items.map((it) => (
-                    <li key={it} className="text-sm">
-                      {it}
-                    </li>
+                    <img
+                      key={it.name}
+                      src={it.badge}
+                      alt={it.name}
+                      className="h-7 w-auto rounded"
+                      loading="lazy"
+                    />
                   ))}
-                </ul>
+                </div>
               </div>
             ))}
           </div>
