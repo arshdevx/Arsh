@@ -1,18 +1,16 @@
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { a as ArrowUpRight, i as Github, n as Mail, r as Linkedin, t as Send } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-Ck_-WRcb.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BLqQGdT0.js
 var import_jsx_runtime = require_jsx_runtime();
-var arsh_png_asset_default = {
-	version: 1,
-	asset_id: "adff0c9c-9cbe-4512-99ce-9f4d511d1bd0",
-	project_id: "18906497-af96-4158-8404-36485e98001d",
-	url: "/__l5e/assets-v1/adff0c9c-9cbe-4512-99ce-9f4d511d1bd0/arsh.png",
-	r2_key: "a/v1/18906497-af96-4158-8404-36485e98001d/adff0c9c-9cbe-4512-99ce-9f4d511d1bd0/arsh.png",
-	original_filename: "arsh.png",
-	size: 740093,
-	content_type: "image/png",
-	created_at: "2026-06-20T08:43:54Z"
-};
+function AvatarInitials({ name }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "h-12 w-12 rounded-full border border-border flex items-center justify-center bg-secondary select-none shrink-0",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			className: "text-sm font-semibold tracking-tight text-foreground",
+			children: name.split(" ").map((n) => n[0]).join("").toUpperCase()
+		})
+	});
+}
 var projects = [
 	{
 		n: "01",
@@ -156,17 +154,10 @@ function Index() {
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "mx-auto max-w-5xl px-6 h-14 flex items-center justify-between",
 					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 							href: "#top",
 							className: "font-mono text-sm font-medium tracking-tight",
-							children: [
-								"arsh",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-primary",
-									children: "."
-								}),
-								"dev"
-							]
+							children: "Arsh Tyagi"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
 							className: "hidden md:flex items-center gap-7 text-sm text-muted-foreground",
@@ -206,15 +197,11 @@ function Index() {
 				className: "mx-auto max-w-5xl px-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-						className: "pt-20 pb-24 md:pt-28 md:pb-32",
+						className: "pt-20 pb-24 md:pt-28 md:pb-32 animate-fade-in-up",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex items-center gap-4 mb-10",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: arsh_png_asset_default.url,
-									alt: "Arsh Tyagi",
-									className: "h-12 w-12 rounded-full object-cover border border-border grayscale"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarInitials, { name: "Arsh Tyagi" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									className: "min-w-0",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "text-sm font-medium truncate",
@@ -258,7 +245,7 @@ function Index() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 						id: "work",
-						className: "py-20 border-t border-border",
+						className: "py-20 border-t border-border animate-fade-in-up animate-fade-in-up-delay-1",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
 							index: "01",
 							label: "Selected work",
@@ -326,7 +313,7 @@ function Index() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 						id: "stack",
-						className: "py-20 border-t border-border",
+						className: "py-20 border-t border-border animate-fade-in-up animate-fade-in-up-delay-1",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
 							index: "02",
 							label: "Stack",
@@ -349,7 +336,7 @@ function Index() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 						id: "about",
-						className: "py-20 border-t border-border grid md:grid-cols-[200px_1fr] gap-10 md:gap-16",
+						className: "py-20 border-t border-border grid md:grid-cols-[200px_1fr] gap-10 md:gap-16 animate-fade-in-up animate-fade-in-up-delay-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHeader, {
 							index: "03",
 							label: "About",
@@ -377,7 +364,7 @@ function Index() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 						id: "contact",
-						className: "py-24 border-t border-border",
+						className: "py-24 border-t border-border animate-fade-in-up animate-fade-in-up-delay-2",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "font-mono text-[11px] uppercase tracking-wider text-muted-foreground",

@@ -1,6 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import arshPhoto from "@/assets/arsh.png.asset.json";
 import { Github, Linkedin, Mail, Send, ArrowUpRight } from "lucide-react";
+
+function AvatarInitials({ name }: { name: string }) {
+  const initials = name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase();
+  return (
+    <div className="h-12 w-12 rounded-full border border-border flex items-center justify-center bg-secondary select-none shrink-0">
+      <span className="text-sm font-semibold tracking-tight text-foreground">
+        {initials}
+      </span>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -106,7 +120,7 @@ function Index() {
       <header className="sticky top-0 z-40 bg-background/85 backdrop-blur border-b border-border">
         <div className="mx-auto max-w-5xl px-6 h-14 flex items-center justify-between">
           <a href="#top" className="font-mono text-sm font-medium tracking-tight">
-            arsh<span className="text-primary">.</span>dev
+            Arsh Tyagi
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
             <a href="#work" className="hover:text-foreground transition">Work</a>
@@ -125,13 +139,9 @@ function Index() {
 
       <main id="top" className="mx-auto max-w-5xl px-6">
         {/* Hero — name first, small inline portrait */}
-        <section className="pt-20 pb-24 md:pt-28 md:pb-32">
+        <section className="pt-20 pb-24 md:pt-28 md:pb-32 animate-fade-in-up">
           <div className="flex items-center gap-4 mb-10">
-            <img
-              src={arshPhoto.url}
-              alt="Arsh Tyagi"
-              className="h-12 w-12 rounded-full object-cover border border-border grayscale"
-            />
+            <AvatarInitials name="Arsh Tyagi" />
             <div className="min-w-0">
               <div className="text-sm font-medium truncate">Arsh Tyagi</div>
               <div className="font-mono text-xs text-muted-foreground">
@@ -169,7 +179,7 @@ function Index() {
         </section>
 
         {/* Selected work */}
-        <section id="work" className="py-20 border-t border-border">
+        <section id="work" className="py-20 border-t border-border animate-fade-in-up animate-fade-in-up-delay-1">
           <SectionHeader index="01" label="Selected work" title="Recent projects" />
           <div className="mt-12 divide-y divide-border border-y border-border">
             {projects.map((p) => (
@@ -227,7 +237,7 @@ function Index() {
         </section>
 
         {/* Stack */}
-        <section id="stack" className="py-20 border-t border-border">
+        <section id="stack" className="py-20 border-t border-border animate-fade-in-up animate-fade-in-up-delay-1">
           <SectionHeader index="02" label="Stack" title="Tools I work with" />
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
             {Object.entries(stack).map(([group, items]) => (
@@ -254,7 +264,7 @@ function Index() {
         {/* About */}
         <section
           id="about"
-          className="py-20 border-t border-border grid md:grid-cols-[200px_1fr] gap-10 md:gap-16"
+          className="py-20 border-t border-border grid md:grid-cols-[200px_1fr] gap-10 md:gap-16 animate-fade-in-up animate-fade-in-up-delay-2"
         >
           <div>
             <SectionHeader index="03" label="About" title="Background" compact />
@@ -282,7 +292,7 @@ function Index() {
         {/* Contact */}
         <section
           id="contact"
-          className="py-24 border-t border-border"
+          className="py-24 border-t border-border animate-fade-in-up animate-fade-in-up-delay-2"
         >
           <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
             04 — Contact
