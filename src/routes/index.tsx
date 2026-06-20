@@ -229,19 +229,23 @@ function Index() {
         {/* Stack */}
         <section id="stack" className="py-20 border-t border-border">
           <SectionHeader index="02" label="Stack" title="Tools I work with" />
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
             {Object.entries(stack).map(([group, items]) => (
               <div key={group}>
                 <h3 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground border-b border-border pb-3">
                   {group}
                 </h3>
-                <ul className="mt-4 space-y-2.5">
+                <div className="mt-4 flex flex-wrap gap-2">
                   {items.map((it) => (
-                    <li key={it} className="text-sm">
-                      {it}
-                    </li>
+                    <img
+                      key={it.name}
+                      src={it.badge}
+                      alt={it.name}
+                      className="h-7 w-auto rounded"
+                      loading="lazy"
+                    />
                   ))}
-                </ul>
+                </div>
               </div>
             ))}
           </div>
