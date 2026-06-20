@@ -144,5 +144,11 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code, pre, .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
   }
 }
