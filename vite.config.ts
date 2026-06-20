@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Enable Nitro with Vercel preset for Vercel deployment.
+  // The @lovable.dev/vite-tanstack-config skips Nitro outside of
+  // Lovable sandbox by default — this forces it on for production builds.
+  nitro: { preset: "vercel" },
 });
