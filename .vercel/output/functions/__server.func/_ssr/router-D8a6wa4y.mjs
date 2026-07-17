@@ -1,11 +1,11 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
-import { a as createRouter, c as createFileRoute, d as useRouter, l as createRootRouteWithContext, n as Scripts, o as Outlet, r as HeadContent, s as lazyRouteComponent, u as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+import { c as HeadContent, d as Outlet, f as lazyRouteComponent, g as useRouter, h as Link, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-mHRn5lkz.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-D8a6wa4y.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-DjMXjgFJ.css";
+var styles_default = "/assets/styles-Lx-UGlLS.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -162,7 +162,7 @@ function RootComponent() {
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {})
 	});
 }
-var $$splitComponentImporter = () => import("./routes-BLqQGdT0.mjs");
+var $$splitComponentImporter = () => import("./routes-BnB1M1F9.mjs");
 var rootRouteChildren = { IndexRoute: createFileRoute("/")({
 	head: () => ({ meta: [
 		{ title: "Arsh Tyagi — Full Stack Developer" },
@@ -177,6 +177,14 @@ var rootRouteChildren = { IndexRoute: createFileRoute("/")({
 		{
 			property: "og:description",
 			content: "Freelance developer building web apps, REST APIs, and Python automation."
+		},
+		{
+			property: "og:type",
+			content: "website"
+		},
+		{
+			name: "twitter:card",
+			content: "summary"
 		}
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter, "component")

@@ -1,26 +1,6 @@
+import { t as createMiddleware } from "./createMiddleware-B_4t7rW1.mjs";
 import { t as renderErrorPage } from "./ssr.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/createStart-BWB9HM9w.js
-var createMiddleware = (options, __opts) => {
-	const resolvedOptions = {
-		type: "request",
-		...__opts || options
-	};
-	return {
-		options: resolvedOptions,
-		middleware: (middleware) => {
-			return createMiddleware({}, Object.assign(resolvedOptions, { middleware }));
-		},
-		inputValidator: (inputValidator) => {
-			return createMiddleware({}, Object.assign(resolvedOptions, { inputValidator }));
-		},
-		client: (client) => {
-			return createMiddleware({}, Object.assign(resolvedOptions, { client }));
-		},
-		server: (server) => {
-			return createMiddleware({}, Object.assign(resolvedOptions, { server }));
-		}
-	};
-};
+//#region node_modules/.nitro/vite/services/ssr/assets/start-BcSBlhe9.js
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
 	for (let i = 0, len = serializationAdapters.length; i < len; i++) {
 		const current = serializationAdapters[i];
@@ -44,8 +24,6 @@ var createStart = (getOptions) => {
 		createMiddleware
 	};
 };
-//#endregion
-//#region node_modules/.nitro/vite/services/ssr/assets/start-ObTnauo7.js
 var errorMiddleware = createMiddleware().server(async ({ next }) => {
 	try {
 		return await next();

@@ -1,20 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Github, Linkedin, Mail, Send, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, type ReactNode } from "react";
+import arshPng from "../assets/arsh.png";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Send,
+  ArrowUpRight,
+  ExternalLink,
+} from "lucide-react";
 
-function AvatarInitials({ name }: { name: string }) {
-  const initials = name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase();
-  return (
-    <div className="h-12 w-12 rounded-full border border-border flex items-center justify-center bg-secondary select-none shrink-0">
-      <span className="text-sm font-semibold tracking-tight text-foreground">
-        {initials}
-      </span>
-    </div>
-  );
-}
+/* ── Route Definition ──────────────────────────────────────────── */
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,10 +27,14 @@ export const Route = createFileRoute("/")({
         content:
           "Freelance developer building web apps, REST APIs, and Python automation.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,
 });
+
+/* ── Data ──────────────────────────────────────────────────────── */
 
 const projects = [
   {
@@ -72,257 +72,634 @@ const projects = [
   },
 ];
 
-const stack: Record<string, { name: string; badge: string }[]> = {
+interface TechItem {
+  name: string;
+  color: string;
+  bg: string;
+}
+
+const techColorMap: Record<string, { color: string; bg: string }> = {
+  React: { color: "#61DAFB", bg: "rgba(97, 218, 251, 0.1)" },
+  JavaScript: { color: "#F7DF1E", bg: "rgba(247, 223, 30, 0.1)" },
+  HTML5: { color: "#E34F26", bg: "rgba(227, 79, 38, 0.1)" },
+  CSS3: { color: "#1572B6", bg: "rgba(21, 114, 182, 0.1)" },
+  Python: { color: "#3776AB", bg: "rgba(55, 118, 171, 0.1)" },
+  "Express.js": { color: "#f5f5f5", bg: "rgba(245, 245, 245, 0.08)" },
+  "Express": { color: "#f5f5f5", bg: "rgba(245, 245, 245, 0.08)" },
+  "Node.js": { color: "#339933", bg: "rgba(51, 153, 51, 0.1)" },
+  FastAPI: { color: "#009688", bg: "rgba(0, 150, 136, 0.1)" },
+  PostgreSQL: { color: "#4169E1", bg: "rgba(65, 105, 225, 0.1)" },
+  MongoDB: { color: "#47A248", bg: "rgba(71, 162, 72, 0.1)" },
+  Redis: { color: "#FF4438", bg: "rgba(255, 68, 56, 0.1)" },
+  Docker: { color: "#2496ED", bg: "rgba(36, 150, 237, 0.1)" },
+  Cloudinary: { color: "#3448C5", bg: "rgba(52, 72, 197, 0.1)" },
+  Git: { color: "#F05032", bg: "rgba(240, 80, 50, 0.1)" },
+  GitHub: { color: "#f5f5f5", bg: "rgba(245, 245, 245, 0.08)" },
+  "VS Code": { color: "#007ACC", bg: "rgba(0, 122, 204, 0.1)" },
+  Playwright: { color: "#45ba4b", bg: "rgba(69, 186, 75, 0.1)" },
+  OpenAI: { color: "#412991", bg: "rgba(65, 41, 145, 0.1)" },
+  Telegram: { color: "#26A5E4", bg: "rgba(38, 165, 228, 0.1)" },
+};
+
+function getTechStyle(name: string) {
+  return techColorMap[name] ?? { color: "#a3a3a3", bg: "rgba(163, 163, 163, 0.08)" };
+}
+
+const stack: Record<string, TechItem[]> = {
   Frontend: [
-    { name: "React", badge: "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" },
-    { name: "JavaScript", badge: "https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" },
-    { name: "HTML5", badge: "https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" },
-    { name: "CSS3", badge: "https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" },
+    { name: "React", ...getTechStyle("React") },
+    { name: "JavaScript", ...getTechStyle("JavaScript") },
+    { name: "HTML5", ...getTechStyle("HTML5") },
+    { name: "CSS3", ...getTechStyle("CSS3") },
   ],
   Backend: [
-    { name: "Python", badge: "https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" },
-    { name: "Express.js", badge: "https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" },
-    { name: "Node.js", badge: "https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" },
-    { name: "FastAPI", badge: "https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" },
+    { name: "Python", ...getTechStyle("Python") },
+    { name: "Express", ...getTechStyle("Express") },
+    { name: "Node.js", ...getTechStyle("Node.js") },
+    { name: "FastAPI", ...getTechStyle("FastAPI") },
   ],
   "Databases & Storage": [
-    { name: "PostgreSQL", badge: "https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" },
-    { name: "MongoDB", badge: "https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" },
-    { name: "Redis", badge: "https://img.shields.io/badge/Redis-FF4438?style=for-the-badge&logo=redis&logoColor=white" },
+    { name: "PostgreSQL", ...getTechStyle("PostgreSQL") },
+    { name: "MongoDB", ...getTechStyle("MongoDB") },
+    { name: "Redis", ...getTechStyle("Redis") },
   ],
   "Cloud & Tools": [
-    { name: "Cloudinary", badge: "https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" },
-    { name: "Git", badge: "https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" },
-    { name: "GitHub", badge: "https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" },
-    { name: "VS Code", badge: "https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" },
+    { name: "Docker", ...getTechStyle("Docker") },
+    { name: "Cloudinary", ...getTechStyle("Cloudinary") },
+    { name: "Git", ...getTechStyle("Git") },
+    { name: "GitHub", ...getTechStyle("GitHub") },
   ],
   Interests: [
-    { name: "AI / ML", badge: "https://img.shields.io/badge/AI%2FML-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" },
-    { name: "Web Dev", badge: "https://img.shields.io/badge/Web%20Dev-6EE7F7?style=for-the-badge&logo=vercel&logoColor=black" },
+    { name: "AI / ML", color: "#FF6F00", bg: "rgba(255, 111, 0, 0.1)" },
+    { name: "Web Dev", color: "#6EE7F7", bg: "rgba(110, 231, 247, 0.1)" },
   ],
 };
 
-function Index() {
+/* ── Hook: Scroll Reveal ───────────────────────────────────────── */
+
+function useScrollReveal() {
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    const selector = ".reveal, .reveal-left, .reveal-scale, .stagger-children";
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+}
+
+/* ── Sub-components ────────────────────────────────────────────── */
+
+function Logo({ size = "default" }: { size?: "small" | "default" | "large" }) {
+  const sizeMap = {
+    small: { container: "h-7 w-7" },
+    default: { container: "h-10 w-10" },
+    large: { container: "h-14 w-14" },
+  };
+  const { container } = sizeMap[size];
+
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
-      {/* Top status bar */}
-      <div className="border-b border-border">
-        <div className="mx-auto max-w-5xl px-6 h-9 flex items-center justify-between text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
-          <span>Arsh Tyagi · Portfolio</span>
-          <span className="hidden sm:flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            Available for freelance — Q3 2026
+    <div className={`relative shrink-0 rounded-full overflow-hidden ${container}`}>
+      {/* Glow behind */}
+      <div
+        className="absolute -inset-3 rounded-full opacity-50 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, var(--glow) 0%, transparent 70%)",
+        }}
+      />
+      <img
+        src={arshPng}
+        alt="Arsh Tyagi"
+        className="relative h-full w-full object-cover rounded-full"
+      />
+    </div>
+  );
+}
+
+function Avatar() {
+  return (
+    <div className="relative shrink-0 group">
+      {/* Gradient border ring */}
+      <div className="gradient-border rounded-full">
+        {/* Glow ring behind */}
+        <div
+          className="absolute -inset-3 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-500"
+          style={{
+            background: "radial-gradient(circle, var(--glow) 0%, transparent 70%)",
+          }}
+        />
+        {/* Ring with subtle rotation on hover */}
+        <div className="relative h-16 w-16 rounded-full border border-border bg-surface flex items-center justify-center select-none glow-ring group-hover:scale-105 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+          <Logo size="default" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AmbientOrbs() {
+  return (
+    <>
+      {/* Top-right large orb */}
+      <div
+        className="ambient-orb orb-float w-72 h-72 -top-32 -right-32"
+        style={{
+          background: "radial-gradient(circle, oklch(0.85 0.2 120 / 0.08) 0%, transparent 70%)",
+        }}
+      />
+      {/* Bottom-left medium orb */}
+      <div
+        className="ambient-orb orb-float-slow w-56 h-56 -bottom-28 -left-28"
+        style={{
+          background: "radial-gradient(circle, oklch(0.75 0.15 140 / 0.06) 0%, transparent 70%)",
+        }}
+      />
+      {/* Center subtle orb */}
+      <div
+        className="ambient-orb orb-drift w-40 h-40 top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{
+          background: "radial-gradient(circle, oklch(0.85 0.2 120 / 0.04) 0%, transparent 70%)",
+        }}
+      />
+    </>
+  );
+}
+
+/* ── Hook: Hero Entrance Animation ─────────────────────────── */
+
+function useHeroEntrance() {
+  useEffect(() => {
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+    const initialTimer = setTimeout(() => {
+      const elements = document.querySelectorAll(".hero-reveal");
+      elements.forEach((el, i) => {
+        const t = setTimeout(() => {
+          el.classList.add("hero-visible");
+        }, i * 120);
+        timeouts.push(t);
+      });
+    }, 200);
+
+    return () => {
+      clearTimeout(initialTimer);
+      timeouts.forEach(clearTimeout);
+    };
+  }, []);
+}
+
+function SectionHeader({
+  index,
+  label,
+  title,
+}: {
+  index: string;
+  label: string;
+  title: string;
+}) {
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-4">
+        <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
+          {index}
+        </span>
+        <span className="divider-accent" />
+        <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
+          {label}
+        </span>
+      </div>
+      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.1]">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
+function TechPill({ name }: { name: string }) {
+  const { color, bg } = getTechStyle(name);
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-mono text-[11px] font-medium tracking-tight border transition-all duration-200"
+      style={{
+        color,
+        backgroundColor: bg,
+        borderColor: `${color}22`,
+      }}
+    >
+      <span
+        className="w-1.5 h-1.5 rounded-full shrink-0"
+        style={{ backgroundColor: color }}
+      />
+      {name}
+    </span>
+  );
+}
+
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof projects)[number];
+  index: number;
+}) {
+  return (
+    <div
+      className="group relative grid grid-cols-[auto_1fr_auto] items-start gap-5 px-4 py-7 -mx-4 rounded-xl card-lift cursor-pointer"
+      style={{
+        transitionDelay: `${index * 80}ms`,
+      }}
+    >
+      {/* Hover background */}
+      <div className="absolute inset-0 rounded-xl bg-secondary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+      {/* Number */}
+      <div className="relative z-10 font-mono text-xs text-muted-foreground pt-1 w-8 select-none">
+        {project.n}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 min-w-0">
+        <div className="flex items-baseline gap-3 flex-wrap">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight group-hover:text-primary transition-colors duration-200">
+            {project.title}
+          </h3>
+          <span className="font-mono text-[11px] text-muted-foreground tracking-wide">
+            {project.year}
           </span>
+          <span className="w-1 h-1 rounded-full bg-border" />
+          <span className="font-mono text-[11px] text-muted-foreground">
+            {project.role}
+          </span>
+        </div>
+
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+          {project.blurb}
+        </p>
+
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.stack.map((s) => (
+            <TechPill key={s} name={s} />
+          ))}
         </div>
       </div>
 
-      {/* Nav */}
-      <header className="sticky top-0 z-40 bg-background/85 backdrop-blur border-b border-border">
-        <div className="mx-auto max-w-5xl px-6 h-14 flex items-center justify-between">
-          <a href="#top" className="font-mono text-sm font-medium tracking-tight">
-            Arsh Tyagi
-          </a>
-          <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
-            <a href="#work" className="hover:text-foreground transition">Work</a>
-            <a href="#stack" className="hover:text-foreground transition">Stack</a>
-            <a href="#about" className="hover:text-foreground transition">About</a>
-            <a href="#contact" className="hover:text-foreground transition">Contact</a>
-          </nav>
-          <a
-            href="mailto:arshcodes1@gmail.com"
-            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider border border-border px-3 py-1.5 rounded hover:bg-secondary transition"
+      {/* Actions */}
+      <div className="relative z-10 flex items-start gap-2 pt-1">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            window.open(project.code, "_blank", "noopener");
+          }}
+          className="flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-background hover:border-muted-foreground/30 hover:scale-110 active:scale-95 transition-all duration-200"
+          aria-label={`${project.title} source code`}
+        >
+          <Github className="h-4 w-4" />
+        </button>          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 active:scale-95 transition-all duration-200"
+            aria-label={`${project.title} live demo`}
           >
-            Email <ArrowUpRight className="h-3.5 w-3.5" />
+            <ExternalLink className="h-4 w-4" />
           </a>
+      </div>
+    </div>
+  );
+}
+
+function ContactCard({
+  icon,
+  label,
+  value,
+  href,
+}: {
+  icon: ReactNode;
+  label: string;
+  value: string;
+  href: string;
+}) {
+  return (
+    <a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      className="group relative flex items-center justify-between gap-4 p-5 rounded-xl border border-border bg-surface/50 hover:bg-surface hover:border-muted-foreground/20 transition-all duration-300 card-lift gradient-border"
+    >
+      {/* Subtle glow on hover */}
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+      <div className="relative z-10 min-w-0">
+        <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground flex items-center gap-2">
+          <span className="text-primary/70 group-hover:scale-110 transition-transform duration-200">{icon}</span>
+          {label}
+        </div>
+        <div className="mt-1.5 text-sm font-medium truncate">{value}</div>
+      </div>
+      <ArrowUpRight
+        className="relative z-10 h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-200 magnetic-arrow"
+        aria-hidden
+      />
+    </a>
+  );
+}
+
+function StackCard({
+  group,
+  items,
+  index,
+}: {
+  group: string;
+  items: TechItem[];
+  index: number;
+}) {
+  return (
+    <div
+      className="reveal"
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <div className="rounded-xl border border-border bg-surface/30 p-5 h-full">
+        <h3 className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground pb-3 mb-3 border-b border-border">
+          {group}
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {items.map((it) => (
+            <span
+              key={it.name}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-mono text-[11px] font-medium tracking-tight border transition-all duration-200 hover:scale-105"
+              style={{
+                color: it.color,
+                backgroundColor: it.bg,
+                borderColor: `${it.color}22`,
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ backgroundColor: it.color }}
+              />
+              {it.name}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main Page Component ──────────────────────────────────────── */
+
+function Index() {
+  useScrollReveal();
+  useHeroEntrance();
+
+  return (
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-foreground">
+      {/* ───── Navigation (Status bar merged in) ───── */}
+      <header className="sticky top-0 z-40 bg-background/75 backdrop-blur-xl border-b border-border">
+        <div className="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between">
+          <a
+            href="#top"
+            className="font-mono text-sm font-medium tracking-tight flex items-center gap-3 group"
+          >
+            <Logo size="small" />
+            <span className="relative">
+              Arsh Tyagi
+              <span className="absolute -bottom-px left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+            </span>
+          </a>
+          <nav className="hidden md:flex items-center gap-8 text-sm">
+            {[
+              { href: "#work", label: "Work" },
+              { href: "#stack", label: "Stack" },
+              { href: "#about", label: "About" },
+              { href: "#contact", label: "Contact" },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-300 after:ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:after:w-full"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:flex items-center gap-2 text-[11px] font-mono text-muted-foreground uppercase tracking-[0.12em]">
+              <span className="status-dot" />
+              Freelance · Q3
+            </span>
+            <a
+              href="mailto:arshcodes1@gmail.com"
+              className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider border border-border px-3.5 py-1.5 rounded-lg hover:bg-secondary hover:border-muted-foreground/30 hover:scale-105 active:scale-95 transition-all duration-200 magnetic-btn"
+            >
+              Email <ArrowUpRight className="h-3 w-3 magnetic-arrow" />
+            </a>
+          </div>
         </div>
       </header>
 
-      <main id="top" className="mx-auto max-w-5xl px-6">
-        {/* Hero — name first, small inline portrait */}
-        <section className="pt-20 pb-24 md:pt-28 md:pb-32 animate-fade-in-up">
-          <div className="flex items-center gap-4 mb-10">
-            <AvatarInitials name="Arsh Tyagi" />
-            <div className="min-w-0">
-              <div className="text-sm font-medium truncate">Arsh Tyagi</div>
-              <div className="font-mono text-xs text-muted-foreground">
-                Noida, IN · IST (UTC+5:30)
+      {/* ───── Main Content ───── */}
+      <main id="top" className="mx-auto max-w-6xl px-6">
+        {/* ═══════ HERO ═══════ */}
+        <section className="relative pt-2 pb-12 md:pt-4 md:pb-20 overflow-hidden">
+          {/* Grid background */}
+          <div
+            className="absolute inset-0 grid-pattern opacity-40 pointer-events-none"
+            style={{ maskImage: "linear-gradient(to bottom, transparent, black 30%, black 70%, transparent)" }}
+          />
+
+          {/* Ambient floating orbs */}
+          <AmbientOrbs />
+
+          {/* Decorative floating dots */}
+          <div className="absolute top-1/4 right-[15%] w-1.5 h-1.5 rounded-full bg-primary/20 float-subtle pointer-events-none" />
+          <div className="absolute top-2/3 left-[10%] w-2 h-2 rounded-full bg-primary/15 orb-float-slow pointer-events-none" style={{ animationDelay: "-5s" }} />
+          <div className="absolute bottom-1/4 right-[25%] w-1 h-1 rounded-full bg-primary/25 breathe pointer-events-none" style={{ animationDelay: "-2s" }} />
+
+          <div className="relative z-10">
+            {/* Avatar + meta row */}
+            <div className="flex items-center gap-5 mb-6 hero-reveal" style={{ animationDelay: "0ms" }}>
+              <Avatar />
+              <div className="min-w-0">
+                <div className="text-base font-semibold flex items-center gap-2">
+                  Arsh Tyagi
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-mono text-primary font-medium uppercase tracking-wider">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary pulse-glow" />
+                    Open to work
+                  </span>
+                </div>
+                <div className="font-mono text-xs text-muted-foreground flex items-center gap-2">
+                  <span>Noida, IN · IST (UTC+5:30)</span>
+                  <span className="w-1 h-1 rounded-full bg-border" />
+                  <span>Full-stack developer</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-4xl md:text-7xl font-semibold tracking-tight leading-[1.05] max-w-4xl hero-reveal" style={{ animationDelay: "120ms" }}>
+              Full-stack developer
+              <br />
+              building{" "}
+              <span className="gradient-text">web apps, REST APIs,</span>
+              <br />
+              <span className="text-muted-foreground">and Python automation</span>
+              {" "}that actually ship.
+            </h1>
+
+            {/* Subtitle */}
+            <p className="mt-5 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed hero-reveal" style={{ animationDelay: "240ms" }}>
+              I work with founders and small teams to design, build, and
+              maintain production systems — from React frontends to FastAPI
+              services and the glue in between.
+            </p>
+
+            {/* CTAs */}
+            <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm hero-reveal" style={{ animationDelay: "360ms" }}>
+              <a
+                href="#work"
+                className="group inline-flex items-center gap-2 font-medium px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:brightness-110 transition-all duration-200 magnetic-btn"
+              >
+                <span>View selected work</span>
+                <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary-foreground/20 group-hover:bg-primary-foreground/30 transition-colors duration-200">
+                  <ArrowUpRight className="h-3.5 w-3.5 magnetic-arrow" />
+                </span>
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground border-b border-transparent hover:border-foreground/40 pb-0.5 transition-all duration-200"
+              >
+                Get in touch &nbsp;→
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════ SELECTED WORK ═══════ */}
+        <section
+          id="work"
+          className="py-24 md:py-32 border-t border-border section-spacer"
+        >
+          <div className="reveal">
+            <SectionHeader
+              index="01"
+              label="Selected work"
+              title="Recent projects"
+            />
+          </div>
+          <div className="mt-12 divide-y divide-border border-y border-border rounded-xl overflow-hidden">
+            {projects.map((p, i) => (
+              <div key={p.title} className="reveal" style={{ transitionDelay: `${i * 120}ms` }}>
+                <ProjectCard project={p} index={i} />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ═══════ STACK ═══════ */}
+        <section id="stack" className="py-24 md:py-32 border-t border-border section-spacer">
+          <div className="reveal">
+            <SectionHeader index="02" label="Stack" title="Tools I work with" />
+          </div>
+
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {Object.entries(stack).map(([group, items], i) => (
+              <StackCard key={group} group={group} items={items} index={i} />
+            ))}
+          </div>
+        </section>
+
+        {/* ═══════ ABOUT ═══════ */}
+        <section id="about" className="py-24 md:py-32 border-t border-border section-spacer">
+          <div className="grid md:grid-cols-[240px_1fr] gap-12 md:gap-20">
+            <div className="reveal-left">
+              <SectionHeader
+                index="03"
+                label="About"
+                title="Background"
+              />
+            </div>
+            <div className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl reveal">
+              <p className="text-foreground/90">
+                I'm a freelance full-stack developer based in Noida, India.
+                Most of my work sits at the intersection of clean React
+                frontends and Python or Node backends — with a strong bias
+                toward shipping over polishing forever.
+              </p>
+              <p>
+                I care about the boring fundamentals: readable code, sensible
+                APIs, useful tests, and documentation your future teammate
+                won't curse you for. Lately I've been spending more time on
+                AI/ML and LLM-powered tooling.
+              </p>
+              {/* Stat-like CTA */}
+              <div className="flex items-center gap-4 pt-4">
+                <div className="h-px flex-1 bg-border" />
+                <span className="text-foreground font-medium text-sm whitespace-nowrap">
+                  Typically responds within{" "}
+                  <span
+                    className="text-primary font-semibold"
+                    style={{ textShadow: "0 0 20px var(--glow)" }}
+                  >
+                    24 hours
+                  </span>
+                </span>
+                <div className="h-px flex-1 bg-border" />
               </div>
             </div>
           </div>
-
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] max-w-3xl">
-            Full-stack developer building{" "}
-            <span className="text-muted-foreground">web apps, REST APIs, and Python automation</span>{" "}
-            that actually ship.
-          </h1>
-
-          <p className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
-            I work with founders and small teams to design, build, and maintain
-            production systems — from React frontends to FastAPI services and
-            the glue in between.
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-            <a
-              href="#work"
-              className="inline-flex items-center gap-1.5 font-medium border-b border-foreground/40 hover:border-foreground transition pb-0.5"
-            >
-              View selected work <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition"
-            >
-              Get in touch →
-            </a>
-          </div>
         </section>
 
-        {/* Selected work */}
-        <section id="work" className="py-20 border-t border-border animate-fade-in-up animate-fade-in-up-delay-1">
-          <SectionHeader index="01" label="Selected work" title="Recent projects" />
-          <div className="mt-12 divide-y divide-border border-y border-border">
-            {projects.map((p) => (
-              <a
-                key={p.title}
-                href={p.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="group grid grid-cols-[auto_1fr_auto] items-start gap-6 py-8 hover:bg-secondary/40 transition px-2 -mx-2 rounded"
-              >
-                <div className="font-mono text-xs text-muted-foreground pt-1.5 w-10">
-                  {p.n}
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-baseline gap-3 flex-wrap">
-                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight group-hover:text-primary transition">
-                      {p.title}
-                    </h3>
-                    <span className="font-mono text-xs text-muted-foreground">
-                      {p.year} · {p.role}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-muted-foreground max-w-2xl leading-relaxed">
-                    {p.blurb}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {p.stack.map((s) => (
-                      <span
-                        key={s}
-                        className="font-mono text-[11px] text-muted-foreground border border-border rounded px-2 py-0.5"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 pt-2 shrink-0">
-                  <span
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.open(p.code, "_blank");
-                    }}
-                    className="inline-flex items-center justify-center h-8 w-8 rounded border border-border hover:bg-background transition"
-                    aria-label="Source"
-                  >
-                    <Github className="h-3.5 w-3.5" />
-                  </span>
-                  <span className="inline-flex items-center justify-center h-8 w-8 rounded border border-border group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition">
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* Stack */}
-        <section id="stack" className="py-20 border-t border-border animate-fade-in-up animate-fade-in-up-delay-1">
-          <SectionHeader index="02" label="Stack" title="Tools I work with" />
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
-            {Object.entries(stack).map(([group, items]) => (
-              <div key={group}>
-                <h3 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground border-b border-border pb-3">
-                  {group}
-                </h3>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {items.map((it) => (
-                    <img
-                      key={it.name}
-                      src={it.badge}
-                      alt={it.name}
-                      className="h-7 w-auto rounded"
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* About */}
-        <section
-          id="about"
-          className="py-20 border-t border-border grid md:grid-cols-[200px_1fr] gap-10 md:gap-16 animate-fade-in-up animate-fade-in-up-delay-2"
-        >
-          <div>
-            <SectionHeader index="03" label="About" title="Background" compact />
-          </div>
-          <div className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl">
-            <p>
-              I'm a freelance full-stack developer based in Noida, India. Most
-              of my work sits at the intersection of clean React frontends and
-              Python or Node backends — with a strong bias toward shipping
-              over polishing forever.
-            </p>
-            <p>
-              I care about the boring fundamentals: readable code, sensible
-              APIs, useful tests, and documentation your future teammate won't
-              curse you for. Lately I've been spending more time on AI/ML and
-              LLM-powered tooling.
-            </p>
-            <p className="text-foreground">
-              Typically responds within{" "}
-              <span className="text-primary font-medium">24 hours</span>.
-            </p>
-          </div>
-        </section>
-
-        {/* Contact */}
+        {/* ═══════ CONTACT ═══════ */}
         <section
           id="contact"
-          className="py-24 border-t border-border animate-fade-in-up animate-fade-in-up-delay-2"
-        >
-          <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-            04 — Contact
-          </p>
-          <h2 className="mt-3 text-4xl md:text-6xl font-semibold tracking-tight max-w-3xl">
-            Have a project in mind?
-            <br />
-            <span className="text-muted-foreground">Let's talk.</span>
-          </h2>
+          className="py-24 md:py-32 border-t border-border section-spacer"
+>
+          <div className="reveal">
+            <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
+              04 — Contact
+            </p>
+            <h2 className="mt-4 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05] max-w-3xl">
+              Have a project in mind?
+              <br />
+              <span className="gradient-text">Let's talk.</span>
+            </h2>
+          </div>
 
-          <div className="mt-12 grid sm:grid-cols-2 gap-px bg-border border border-border rounded overflow-hidden max-w-2xl">
-            <ContactRow
+          <div className="mt-12 grid sm:grid-cols-2 gap-3 max-w-2xl reveal">
+            <ContactCard
               icon={<Mail className="h-4 w-4" />}
               label="Email"
               value="arshcodes1@gmail.com"
               href="mailto:arshcodes1@gmail.com"
             />
-            <ContactRow
+            <ContactCard
               icon={<Send className="h-4 w-4" />}
               label="Telegram"
               value="@anikyn"
               href="https://t.me/anikyn"
             />
-            <ContactRow
+            <ContactCard
               icon={<Linkedin className="h-4 w-4" />}
               label="LinkedIn"
               value="linkedin.com/in/arshdevx"
               href="https://linkedin.com/in/arshdevx"
             />
-            <ContactRow
+            <ContactCard
               icon={<Github className="h-4 w-4" />}
               label="GitHub"
               value="github.com/arshdevx"
@@ -332,70 +709,17 @@ function Index() {
         </section>
       </main>
 
+      {/* ───── Footer ───── */}
       <footer className="border-t border-border">
-        <div className="mx-auto max-w-5xl px-6 py-8 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+        <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
           <span>© {new Date().getFullYear()} Arsh Tyagi</span>
-          <span>Built in Noida · v2026.06</span>
+          <span className="flex items-center gap-2">
+            Built in Noida
+            <span className="w-1 h-1 rounded-full bg-primary" />
+            <span>v2026.06</span>
+          </span>
         </div>
       </footer>
     </div>
-  );
-}
-
-function SectionHeader({
-  index,
-  label,
-  title,
-  compact = false,
-}: {
-  index: string;
-  label: string;
-  title: string;
-  compact?: boolean;
-}) {
-  return (
-    <div>
-      <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-        {index} — {label}
-      </p>
-      <h2
-        className={
-          compact
-            ? "mt-3 text-2xl font-semibold tracking-tight"
-            : "mt-3 text-3xl md:text-4xl font-semibold tracking-tight"
-        }
-      >
-        {title}
-      </h2>
-    </div>
-  );
-}
-
-function ContactRow({
-  icon,
-  label,
-  value,
-  href,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href: string;
-}) {
-  return (
-    <a
-      href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel="noreferrer"
-      className="group bg-background hover:bg-secondary/60 transition p-5 flex items-center justify-between gap-4"
-    >
-      <div className="min-w-0">
-        <div className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-          {icon} {label}
-        </div>
-        <div className="mt-1.5 text-sm truncate">{value}</div>
-      </div>
-      <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition shrink-0" />
-    </a>
   );
 }
