@@ -15,17 +15,20 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Arsh Tyagi — Full Stack Developer" },
+      { title: "Arsh Tyagi — Co-founder @ Klyphic · AI & Automation" },
       {
         name: "description",
         content:
-          "Arsh Tyagi: freelance full stack developer in Noida building React web apps, FastAPI / Express REST APIs, and Python automation.",
+          "Arsh Tyagi: student & co-founder at Klyphic building AI agents, APIs, and automation — termai, TuneHive, and KlyForge.",
       },
-      { property: "og:title", content: "Arsh Tyagi — Full Stack Developer" },
+      {
+        property: "og:title",
+        content: "Arsh Tyagi — Co-founder @ Klyphic · AI & Automation",
+      },
       {
         property: "og:description",
         content:
-          "Freelance developer building web apps, REST APIs, and Python automation.",
+          "Co-founder at Klyphic — building AI agents, APIs, and automation that actually ship.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -40,35 +43,38 @@ const projects = [
   {
     n: "01",
     year: "2026",
-    title: "DevAPI Toolkit",
+    title: "termai",
+    status: "Shipped",
     blurb:
-      "Production-ready FastAPI starter with auth, rate limiting, background workers, and auto-generated OpenAPI docs.",
-    stack: ["FastAPI", "PostgreSQL", "Redis", "Docker"],
-    role: "Design · Backend",
-    demo: "#",
-    code: "https://github.com/arshdevx",
+      "CLI that turns plain English into Bash commands, powered by NVIDIA NIM's LLaMA 3.3 70B. When a command fails, termai analyzes the error, proposes a fix, and retries with your permission — up to 5 attempts.",
+    stack: ["Python", "NVIDIA NIM", "LLaMA 3.3", "Bash"],
+    role: "AI · CLI",
+    demo: "",
+    code: "https://github.com/klyphic/termai",
   },
   {
     n: "02",
-    year: "2025",
-    title: "Pixelcrate",
+    year: "2026",
+    title: "TuneHive",
+    status: "In progress",
     blurb:
-      "Full-stack React + Express media library with Cloudinary uploads, tag search, and shareable collections.",
-    stack: ["React", "Express", "MongoDB", "Cloudinary"],
-    role: "Full stack",
-    demo: "#",
-    code: "https://github.com/arshdevx",
+      "Free music-streaming PWA with an AI-powered recommendation engine — Bollywood, Punjabi, English, and more, no subscription needed.",
+    stack: ["PWA", "JavaScript", "Python", "ML"],
+    role: "ML · Product",
+    demo: "https://tunehive.klyphic.in",
+    code: "",
   },
   {
     n: "03",
-    year: "2025",
-    title: "AutoScribe Bot",
+    year: "2026",
+    title: "KlyForge",
+    status: "Building",
     blurb:
-      "Python automation that scrapes news sources, summarizes with an LLM, and ships digests to Telegram on a cron.",
-    stack: ["Python", "Playwright", "OpenAI", "Telegram"],
-    role: "Automation",
-    demo: "#",
-    code: "https://github.com/arshdevx",
+      "Klyphic's production-grade AI & utility API platform — a unified ecosystem for APIs, apps, and automation with predictable latency and clean contracts.",
+    stack: ["FastAPI", "Python", "REST APIs", "AI"],
+    role: "Co-founder · Platform",
+    demo: "https://klyphic.in",
+    code: "https://github.com/klyphic",
   },
 ];
 
@@ -88,17 +94,17 @@ const techColorMap: Record<string, { color: string; bg: string }> = {
   "Express": { color: "#f5f5f5", bg: "rgba(245, 245, 245, 0.08)" },
   "Node.js": { color: "#339933", bg: "rgba(51, 153, 51, 0.1)" },
   FastAPI: { color: "#009688", bg: "rgba(0, 150, 136, 0.1)" },
-  PostgreSQL: { color: "#4169E1", bg: "rgba(65, 105, 225, 0.1)" },
-  MongoDB: { color: "#47A248", bg: "rgba(71, 162, 72, 0.1)" },
-  Redis: { color: "#FF4438", bg: "rgba(255, 68, 56, 0.1)" },
-  Docker: { color: "#2496ED", bg: "rgba(36, 150, 237, 0.1)" },
-  Cloudinary: { color: "#3448C5", bg: "rgba(52, 72, 197, 0.1)" },
   Git: { color: "#F05032", bg: "rgba(240, 80, 50, 0.1)" },
   GitHub: { color: "#f5f5f5", bg: "rgba(245, 245, 245, 0.08)" },
   "VS Code": { color: "#007ACC", bg: "rgba(0, 122, 204, 0.1)" },
-  Playwright: { color: "#45ba4b", bg: "rgba(69, 186, 75, 0.1)" },
-  OpenAI: { color: "#412991", bg: "rgba(65, 41, 145, 0.1)" },
-  Telegram: { color: "#26A5E4", bg: "rgba(38, 165, 228, 0.1)" },
+  "NVIDIA NIM": { color: "#76B900", bg: "rgba(118, 185, 0, 0.1)" },
+  "LLaMA 3.3": { color: "#0866FF", bg: "rgba(8, 102, 255, 0.1)" },
+  LLMs: { color: "#7C3AED", bg: "rgba(124, 58, 237, 0.1)" },
+  Bash: { color: "#4EAA25", bg: "rgba(78, 170, 37, 0.1)" },
+  Linux: { color: "#FCC624", bg: "rgba(252, 198, 36, 0.1)" },
+  PWA: { color: "#5A0FC8", bg: "rgba(90, 15, 200, 0.1)" },
+  ML: { color: "#FF6F00", bg: "rgba(255, 111, 0, 0.1)" },
+  "REST APIs": { color: "#6EE7F7", bg: "rgba(110, 231, 247, 0.1)" },
 };
 
 function getTechStyle(name: string) {
@@ -107,32 +113,54 @@ function getTechStyle(name: string) {
 
 const stack: Record<string, TechItem[]> = {
   Frontend: [
-    { name: "React", ...getTechStyle("React") },
     { name: "JavaScript", ...getTechStyle("JavaScript") },
+    { name: "React", ...getTechStyle("React") },
+    { name: "PWA", ...getTechStyle("PWA") },
     { name: "HTML5", ...getTechStyle("HTML5") },
     { name: "CSS3", ...getTechStyle("CSS3") },
   ],
   Backend: [
     { name: "Python", ...getTechStyle("Python") },
-    { name: "Express", ...getTechStyle("Express") },
-    { name: "Node.js", ...getTechStyle("Node.js") },
     { name: "FastAPI", ...getTechStyle("FastAPI") },
+    { name: "Node.js", ...getTechStyle("Node.js") },
+    { name: "REST APIs", ...getTechStyle("REST APIs") },
   ],
-  "Databases & Storage": [
-    { name: "PostgreSQL", ...getTechStyle("PostgreSQL") },
-    { name: "MongoDB", ...getTechStyle("MongoDB") },
-    { name: "Redis", ...getTechStyle("Redis") },
+  "AI & ML": [
+    { name: "LLMs", ...getTechStyle("LLMs") },
+    { name: "NVIDIA NIM", ...getTechStyle("NVIDIA NIM") },
+    { name: "LLaMA 3.3", ...getTechStyle("LLaMA 3.3") },
+    { name: "ML", ...getTechStyle("ML") },
   ],
-  "Cloud & Tools": [
-    { name: "Docker", ...getTechStyle("Docker") },
-    { name: "Cloudinary", ...getTechStyle("Cloudinary") },
+  Tools: [
     { name: "Git", ...getTechStyle("Git") },
     { name: "GitHub", ...getTechStyle("GitHub") },
+    { name: "Linux", ...getTechStyle("Linux") },
+    { name: "Bash", ...getTechStyle("Bash") },
+    { name: "VS Code", ...getTechStyle("VS Code") },
   ],
   Interests: [
     { name: "AI / ML", color: "#FF6F00", bg: "rgba(255, 111, 0, 0.1)" },
-    { name: "Web Dev", color: "#6EE7F7", bg: "rgba(110, 231, 247, 0.1)" },
+    { name: "Automation", color: "#6EE7F7", bg: "rgba(110, 231, 247, 0.1)" },
   ],
+};
+
+const marqueeItems = [
+  "Python",
+  "FastAPI",
+  "JavaScript",
+  "NVIDIA NIM",
+  "LLMs",
+  "PWA",
+  "Linux",
+  "Bash",
+  "GitHub",
+  "Automation",
+];
+
+const statusStyles: Record<string, string> = {
+  Shipped: "text-emerald-400 border-emerald-400/30 bg-emerald-400/10",
+  "In progress": "text-amber-400 border-amber-400/30 bg-amber-400/10",
+  Building: "text-sky-400 border-sky-400/30 bg-sky-400/10",
 };
 
 /* ── Hook: Scroll Reveal ───────────────────────────────────────── */
@@ -240,27 +268,7 @@ function AmbientOrbs() {
   );
 }
 
-/* ── Hook: Hero Entrance Animation ─────────────────────────── */
-
-function useHeroEntrance() {
-  useEffect(() => {
-    const timeouts: ReturnType<typeof setTimeout>[] = [];
-    const initialTimer = setTimeout(() => {
-      const elements = document.querySelectorAll(".hero-reveal");
-      elements.forEach((el, i) => {
-        const t = setTimeout(() => {
-          el.classList.add("hero-visible");
-        }, i * 120);
-        timeouts.push(t);
-      });
-    }, 200);
-
-    return () => {
-      clearTimeout(initialTimer);
-      timeouts.forEach(clearTimeout);
-    };
-  }, []);
-}
+/* ── Hero entrance is pure CSS (see .hero-reveal in styles.css) ─ */
 
 function SectionHeader({
   index,
@@ -344,6 +352,14 @@ function ProjectCard({
           <span className="font-mono text-[11px] text-muted-foreground">
             {project.role}
           </span>
+          {project.status && (
+            <span
+              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border font-mono text-[10px] font-medium uppercase tracking-wider ${statusStyles[project.status] ?? "text-muted-foreground border-border bg-surface"}`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
+              {project.status}
+            </span>
+          )}
         </div>
 
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-2xl">
@@ -359,16 +375,20 @@ function ProjectCard({
 
       {/* Actions */}
       <div className="relative z-10 flex items-start gap-2 pt-1">
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            window.open(project.code, "_blank", "noopener");
-          }}
-          className="flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-background hover:border-muted-foreground/30 hover:scale-110 active:scale-95 transition-all duration-200"
-          aria-label={`${project.title} source code`}
-        >
-          <Github className="h-4 w-4" />
-        </button>          <a
+        {project.code && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(project.code, "_blank", "noopener");
+            }}
+            className="flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-background hover:border-muted-foreground/30 hover:scale-110 active:scale-95 transition-all duration-200"
+            aria-label={`${project.title} source code`}
+          >
+            <Github className="h-4 w-4" />
+          </button>
+        )}
+        {project.demo && (
+          <a
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
@@ -377,6 +397,7 @@ function ProjectCard({
           >
             <ExternalLink className="h-4 w-4" />
           </a>
+        )}
       </div>
     </div>
   );
@@ -464,7 +485,6 @@ function StackCard({
 
 function Index() {
   useScrollReveal();
-  useHeroEntrance();
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-foreground">
@@ -500,7 +520,7 @@ function Index() {
           <div className="flex items-center gap-3">
             <span className="hidden sm:flex items-center gap-2 text-[11px] font-mono text-muted-foreground uppercase tracking-[0.12em]">
               <span className="status-dot" />
-              Freelance · Q3
+              Co-founder · Klyphic
             </span>
             <a
               href="mailto:arshcodes1@gmail.com"
@@ -539,33 +559,33 @@ function Index() {
                   Arsh Tyagi
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-mono text-primary font-medium uppercase tracking-wider">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary pulse-glow" />
-                    Open to work
+                    Co-founder @ Klyphic
                   </span>
                 </div>
                 <div className="font-mono text-xs text-muted-foreground flex items-center gap-2">
                   <span>Noida, IN · IST (UTC+5:30)</span>
                   <span className="w-1 h-1 rounded-full bg-border" />
-                  <span>Full-stack developer</span>
+                  <span>Student · AI & automation</span>
                 </div>
               </div>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl md:text-7xl font-semibold tracking-tight leading-[1.05] max-w-4xl hero-reveal" style={{ animationDelay: "120ms" }}>
-              Full-stack developer
+              Student & co-founder
               <br />
               building{" "}
-              <span className="gradient-text">web apps, REST APIs,</span>
+              <span className="gradient-text">AI agents, APIs,</span>
               <br />
-              <span className="text-muted-foreground">and Python automation</span>
+              <span className="text-muted-foreground">and automation</span>
               {" "}that actually ship.
             </h1>
 
             {/* Subtitle */}
             <p className="mt-5 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed hero-reveal" style={{ animationDelay: "240ms" }}>
-              I work with founders and small teams to design, build, and
-              maintain production systems — from React frontends to FastAPI
-              services and the glue in between.
+              I'm a student and co-founder of Klyphic — building AI,
+              APIs, and automation across developer tools, streaming
+              platforms, and a unified API ecosystem.
             </p>
 
             {/* CTAs */}
@@ -588,6 +608,28 @@ function Index() {
             </div>
           </div>
         </section>
+
+        {/* ═══════ TECH MARQUEE ═══════ */}
+        <div
+          className="marquee border-y border-border py-4 -mx-6 overflow-hidden select-none"
+          aria-hidden="true"
+        >
+          <div className="marquee-track">
+            {[0, 1].map((dup) => (
+              <div key={dup} className="flex items-center gap-10 pr-10 shrink-0">
+                {marqueeItems.map((item) => (
+                  <span
+                    key={`${dup}-${item}`}
+                    className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground whitespace-nowrap"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-primary" />
+                    {item}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* ═══════ SELECTED WORK ═══════ */}
         <section
@@ -635,16 +677,17 @@ function Index() {
             </div>
             <div className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl reveal">
               <p className="text-foreground/90">
-                I'm a freelance full-stack developer based in Noida, India.
-                Most of my work sits at the intersection of clean React
-                frontends and Python or Node backends — with a strong bias
-                toward shipping over polishing forever.
+                I'm a student and co-founder of Klyphic, a tech ecosystem
+                building AI, APIs, apps, and automation. With my co-founders,
+                I ship developer tools, consumer products, and the
+                infrastructure that powers them.
               </p>
               <p>
-                I care about the boring fundamentals: readable code, sensible
-                APIs, useful tests, and documentation your future teammate
-                won't curse you for. Lately I've been spending more time on
-                AI/ML and LLM-powered tooling.
+                My work sits at the intersection of Python and JavaScript —
+                from LLM-powered CLIs like termai to ML-driven products like
+                TuneHive and the KlyForge API platform. I care about the
+                boring fundamentals: readable code, sensible APIs, and
+                documentation your future teammate won't curse you for.
               </p>
               {/* Stat-like CTA */}
               <div className="flex items-center gap-4 pt-4">
@@ -713,11 +756,7 @@ function Index() {
       <footer className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-8 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
           <span>© {new Date().getFullYear()} Arsh Tyagi</span>
-          <span className="flex items-center gap-2">
-            Built in Noida
-            <span className="w-1 h-1 rounded-full bg-primary" />
-            <span>v2026.06</span>
-          </span>
+          <span>v2026.09</span>
         </div>
       </footer>
     </div>

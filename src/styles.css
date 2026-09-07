@@ -352,16 +352,11 @@
   animation: orb-drift 30s ease-in-out infinite;
 }
 
+/* Hero entrance — pure CSS, starts immediately on load (no JS delay,
+   so the page never sits black waiting for timers). Stagger comes from
+   inline animation-delay on each element. */
 .hero-reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-reveal.hero-visible {
-  opacity: 1;
-  transform: translateY(0);
+  animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .gradient-border {
@@ -473,12 +468,65 @@
   box-shadow: 0 8px 32px oklch(0 0 0 / 0.3);
 }
 
-/* ── Gradient text ────────────────────────────────────────────── */
+/* ── Gradient text (animated shimmer) ─────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary), oklch(0.75 0.15 140));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    oklch(0.75 0.15 140),
+    var(--color-primary)
+  );
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradient-shimmer 8s ease-in-out infinite;
+}
+
+@keyframes gradient-shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ── Tech marquee ─────────────────────────────────────────────── */
+.marquee {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ── Animated border (subtle) ──────────────────────────────────── */

@@ -1,7 +1,7 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { a as ExternalLink, i as Github, n as Mail, o as ArrowUpRight, r as Linkedin, t as Send } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-BnB1M1F9.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DgRlJ5a5.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var arsh_default = "/assets/arsh-CT4hEBel.png";
@@ -9,47 +9,50 @@ var projects = [
 	{
 		n: "01",
 		year: "2026",
-		title: "DevAPI Toolkit",
-		blurb: "Production-ready FastAPI starter with auth, rate limiting, background workers, and auto-generated OpenAPI docs.",
+		title: "termai",
+		status: "Shipped",
+		blurb: "CLI that turns plain English into Bash commands, powered by NVIDIA NIM's LLaMA 3.3 70B. When a command fails, termai analyzes the error, proposes a fix, and retries with your permission — up to 5 attempts.",
 		stack: [
-			"FastAPI",
-			"PostgreSQL",
-			"Redis",
-			"Docker"
+			"Python",
+			"NVIDIA NIM",
+			"LLaMA 3.3",
+			"Bash"
 		],
-		role: "Design · Backend",
-		demo: "#",
-		code: "https://github.com/arshdevx"
+		role: "AI · CLI",
+		demo: "",
+		code: "https://github.com/klyphic/termai"
 	},
 	{
 		n: "02",
-		year: "2025",
-		title: "Pixelcrate",
-		blurb: "Full-stack React + Express media library with Cloudinary uploads, tag search, and shareable collections.",
+		year: "2026",
+		title: "TuneHive",
+		status: "In progress",
+		blurb: "Free music-streaming PWA with an AI-powered recommendation engine — Bollywood, Punjabi, English, and more, no subscription needed.",
 		stack: [
-			"React",
-			"Express",
-			"MongoDB",
-			"Cloudinary"
+			"PWA",
+			"JavaScript",
+			"Python",
+			"ML"
 		],
-		role: "Full stack",
-		demo: "#",
-		code: "https://github.com/arshdevx"
+		role: "ML · Product",
+		demo: "https://tunehive.klyphic.in",
+		code: ""
 	},
 	{
 		n: "03",
-		year: "2025",
-		title: "AutoScribe Bot",
-		blurb: "Python automation that scrapes news sources, summarizes with an LLM, and ships digests to Telegram on a cron.",
+		year: "2026",
+		title: "KlyForge",
+		status: "Building",
+		blurb: "Klyphic's production-grade AI & utility API platform — a unified ecosystem for APIs, apps, and automation with predictable latency and clean contracts.",
 		stack: [
+			"FastAPI",
 			"Python",
-			"Playwright",
-			"OpenAI",
-			"Telegram"
+			"REST APIs",
+			"AI"
 		],
-		role: "Automation",
-		demo: "#",
-		code: "https://github.com/arshdevx"
+		role: "Co-founder · Platform",
+		demo: "https://klyphic.in",
+		code: "https://github.com/klyphic"
 	}
 ];
 var techColorMap = {
@@ -89,26 +92,6 @@ var techColorMap = {
 		color: "#009688",
 		bg: "rgba(0, 150, 136, 0.1)"
 	},
-	PostgreSQL: {
-		color: "#4169E1",
-		bg: "rgba(65, 105, 225, 0.1)"
-	},
-	MongoDB: {
-		color: "#47A248",
-		bg: "rgba(71, 162, 72, 0.1)"
-	},
-	Redis: {
-		color: "#FF4438",
-		bg: "rgba(255, 68, 56, 0.1)"
-	},
-	Docker: {
-		color: "#2496ED",
-		bg: "rgba(36, 150, 237, 0.1)"
-	},
-	Cloudinary: {
-		color: "#3448C5",
-		bg: "rgba(52, 72, 197, 0.1)"
-	},
 	Git: {
 		color: "#F05032",
 		bg: "rgba(240, 80, 50, 0.1)"
@@ -121,17 +104,37 @@ var techColorMap = {
 		color: "#007ACC",
 		bg: "rgba(0, 122, 204, 0.1)"
 	},
-	Playwright: {
-		color: "#45ba4b",
-		bg: "rgba(69, 186, 75, 0.1)"
+	"NVIDIA NIM": {
+		color: "#76B900",
+		bg: "rgba(118, 185, 0, 0.1)"
 	},
-	OpenAI: {
-		color: "#412991",
-		bg: "rgba(65, 41, 145, 0.1)"
+	"LLaMA 3.3": {
+		color: "#0866FF",
+		bg: "rgba(8, 102, 255, 0.1)"
 	},
-	Telegram: {
-		color: "#26A5E4",
-		bg: "rgba(38, 165, 228, 0.1)"
+	LLMs: {
+		color: "#7C3AED",
+		bg: "rgba(124, 58, 237, 0.1)"
+	},
+	Bash: {
+		color: "#4EAA25",
+		bg: "rgba(78, 170, 37, 0.1)"
+	},
+	Linux: {
+		color: "#FCC624",
+		bg: "rgba(252, 198, 36, 0.1)"
+	},
+	PWA: {
+		color: "#5A0FC8",
+		bg: "rgba(90, 15, 200, 0.1)"
+	},
+	ML: {
+		color: "#FF6F00",
+		bg: "rgba(255, 111, 0, 0.1)"
+	},
+	"REST APIs": {
+		color: "#6EE7F7",
+		bg: "rgba(110, 231, 247, 0.1)"
 	}
 };
 function getTechStyle(name) {
@@ -143,12 +146,16 @@ function getTechStyle(name) {
 var stack = {
 	Frontend: [
 		{
+			name: "JavaScript",
+			...getTechStyle("JavaScript")
+		},
+		{
 			name: "React",
 			...getTechStyle("React")
 		},
 		{
-			name: "JavaScript",
-			...getTechStyle("JavaScript")
+			name: "PWA",
+			...getTechStyle("PWA")
 		},
 		{
 			name: "HTML5",
@@ -165,41 +172,37 @@ var stack = {
 			...getTechStyle("Python")
 		},
 		{
-			name: "Express",
-			...getTechStyle("Express")
+			name: "FastAPI",
+			...getTechStyle("FastAPI")
 		},
 		{
 			name: "Node.js",
 			...getTechStyle("Node.js")
 		},
 		{
-			name: "FastAPI",
-			...getTechStyle("FastAPI")
+			name: "REST APIs",
+			...getTechStyle("REST APIs")
 		}
 	],
-	"Databases & Storage": [
+	"AI & ML": [
 		{
-			name: "PostgreSQL",
-			...getTechStyle("PostgreSQL")
+			name: "LLMs",
+			...getTechStyle("LLMs")
 		},
 		{
-			name: "MongoDB",
-			...getTechStyle("MongoDB")
+			name: "NVIDIA NIM",
+			...getTechStyle("NVIDIA NIM")
 		},
 		{
-			name: "Redis",
-			...getTechStyle("Redis")
+			name: "LLaMA 3.3",
+			...getTechStyle("LLaMA 3.3")
+		},
+		{
+			name: "ML",
+			...getTechStyle("ML")
 		}
 	],
-	"Cloud & Tools": [
-		{
-			name: "Docker",
-			...getTechStyle("Docker")
-		},
-		{
-			name: "Cloudinary",
-			...getTechStyle("Cloudinary")
-		},
+	Tools: [
 		{
 			name: "Git",
 			...getTechStyle("Git")
@@ -207,6 +210,18 @@ var stack = {
 		{
 			name: "GitHub",
 			...getTechStyle("GitHub")
+		},
+		{
+			name: "Linux",
+			...getTechStyle("Linux")
+		},
+		{
+			name: "Bash",
+			...getTechStyle("Bash")
+		},
+		{
+			name: "VS Code",
+			...getTechStyle("VS Code")
 		}
 	],
 	Interests: [{
@@ -214,10 +229,27 @@ var stack = {
 		color: "#FF6F00",
 		bg: "rgba(255, 111, 0, 0.1)"
 	}, {
-		name: "Web Dev",
+		name: "Automation",
 		color: "#6EE7F7",
 		bg: "rgba(110, 231, 247, 0.1)"
 	}]
+};
+var marqueeItems = [
+	"Python",
+	"FastAPI",
+	"JavaScript",
+	"NVIDIA NIM",
+	"LLMs",
+	"PWA",
+	"Linux",
+	"Bash",
+	"GitHub",
+	"Automation"
+];
+var statusStyles = {
+	Shipped: "text-emerald-400 border-emerald-400/30 bg-emerald-400/10",
+	"In progress": "text-amber-400 border-amber-400/30 bg-amber-400/10",
+	Building: "text-sky-400 border-sky-400/30 bg-sky-400/10"
 };
 function useScrollReveal() {
 	const initialized = (0, import_react.useRef)(false);
@@ -364,6 +396,10 @@ function ProjectCard({ project, index }) {
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "font-mono text-[11px] text-muted-foreground",
 								children: project.role
+							}),
+							project.status && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: `inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border font-mono text-[10px] font-medium uppercase tracking-wider ${statusStyles[project.status] ?? "text-muted-foreground border-border bg-surface"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1.5 h-1.5 rounded-full bg-current animate-pulse" }), project.status]
 							})
 						]
 					}),
@@ -379,26 +415,22 @@ function ProjectCard({ project, index }) {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "relative z-10 flex items-start gap-2 pt-1",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						onClick: (e) => {
-							e.preventDefault();
-							window.open(project.code, "_blank", "noopener");
-						},
-						className: "flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-background hover:border-muted-foreground/30 hover:scale-110 active:scale-95 transition-all duration-200",
-						"aria-label": `${project.title} source code`,
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Github, { className: "h-4 w-4" })
-					}),
-					"          ",
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-						href: project.demo,
-						target: "_blank",
-						rel: "noopener noreferrer",
-						className: "flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 active:scale-95 transition-all duration-200",
-						"aria-label": `${project.title} live demo`,
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, { className: "h-4 w-4" })
-					})
-				]
+				children: [project.code && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+					onClick: (e) => {
+						e.preventDefault();
+						window.open(project.code, "_blank", "noopener");
+					},
+					className: "flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-background hover:border-muted-foreground/30 hover:scale-110 active:scale-95 transition-all duration-200",
+					"aria-label": `${project.title} source code`,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Github, { className: "h-4 w-4" })
+				}), project.demo && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: project.demo,
+					target: "_blank",
+					rel: "noopener noreferrer",
+					className: "flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-background/50 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 active:scale-95 transition-all duration-200",
+					"aria-label": `${project.title} live demo`,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, { className: "h-4 w-4" })
+				})]
 			})
 		]
 	});
@@ -506,7 +538,7 @@ function Index() {
 							className: "flex items-center gap-3",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 								className: "hidden sm:flex items-center gap-2 text-[11px] font-mono text-muted-foreground uppercase tracking-[0.12em]",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "status-dot" }), "Freelance · Q3"]
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "status-dot" }), "Co-founder · Klyphic"]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 								href: "mailto:arshcodes1@gmail.com",
 								className: "inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider border border-border px-3.5 py-1.5 rounded-lg hover:bg-secondary hover:border-muted-foreground/30 hover:scale-105 active:scale-95 transition-all duration-200 magnetic-btn",
@@ -549,14 +581,14 @@ function Index() {
 												className: "text-base font-semibold flex items-center gap-2",
 												children: ["Arsh Tyagi", /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 													className: "inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-mono text-primary font-medium uppercase tracking-wider",
-													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1.5 h-1.5 rounded-full bg-primary pulse-glow" }), "Open to work"]
+													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1.5 h-1.5 rounded-full bg-primary pulse-glow" }), "Co-founder @ Klyphic"]
 												})]
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 												className: "font-mono text-xs text-muted-foreground flex items-center gap-2",
 												children: [
 													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Noida, IN · IST (UTC+5:30)" }),
 													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1 h-1 rounded-full bg-border" }),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Full-stack developer" })
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Student · AI & automation" })
 												]
 											})]
 										})]
@@ -565,18 +597,18 @@ function Index() {
 										className: "text-4xl md:text-7xl font-semibold tracking-tight leading-[1.05] max-w-4xl hero-reveal",
 										style: { animationDelay: "120ms" },
 										children: [
-											"Full-stack developer",
+											"Student & co-founder",
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
 											"building",
 											" ",
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 												className: "gradient-text",
-												children: "web apps, REST APIs,"
+												children: "AI agents, APIs,"
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 												className: "text-muted-foreground",
-												children: "and Python automation"
+												children: "and automation"
 											}),
 											" ",
 											"that actually ship."
@@ -585,7 +617,7 @@ function Index() {
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "mt-5 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed hero-reveal",
 										style: { animationDelay: "240ms" },
-										children: "I work with founders and small teams to design, build, and maintain production systems — from React frontends to FastAPI services and the glue in between."
+										children: "I'm a student and co-founder of Klyphic — building AI, APIs, and automation across developer tools, streaming platforms, and a unified API ecosystem."
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "mt-6 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm hero-reveal",
@@ -606,6 +638,20 @@ function Index() {
 								]
 							})
 						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "marquee border-y border-border py-4 -mx-6 overflow-hidden select-none",
+						"aria-hidden": "true",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "marquee-track",
+							children: [0, 1].map((dup) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "flex items-center gap-10 pr-10 shrink-0",
+								children: marqueeItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: "flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground whitespace-nowrap",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1 h-1 rounded-full bg-primary" }), item]
+								}, `${dup}-${item}`))
+							}, dup))
+						})
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 						id: "work",
@@ -665,9 +711,9 @@ function Index() {
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 										className: "text-foreground/90",
-										children: "I'm a freelance full-stack developer based in Noida, India. Most of my work sits at the intersection of clean React frontends and Python or Node backends — with a strong bias toward shipping over polishing forever."
+										children: "I'm a student and co-founder of Klyphic, a tech ecosystem building AI, APIs, apps, and automation. With my co-founders, I ship developer tools, consumer products, and the infrastructure that powers them."
 									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "I care about the boring fundamentals: readable code, sensible APIs, useful tests, and documentation your future teammate won't curse you for. Lately I've been spending more time on AI/ML and LLM-powered tooling." }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "My work sits at the intersection of Python and JavaScript — from LLM-powered CLIs like termai to ML-driven products like TuneHive and the KlyForge API platform. I care about the boring fundamentals: readable code, sensible APIs, and documentation your future teammate won't curse you for." }),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "flex items-center gap-4 pt-4",
 										children: [
@@ -755,7 +801,7 @@ function Index() {
 						children: [
 							"Built in Noida",
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-1 h-1 rounded-full bg-primary" }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "v2026.06" })
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "v2026.09" })
 						]
 					})]
 				})
