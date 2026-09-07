@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import arshPng from "../assets/arsh.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -87,6 +88,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@arshdevx" },
     ],
     links: [
+      {
+        rel: "icon",
+        type: "image/png",
+        href: arshPng,
+      },
+      {
+        rel: "apple-touch-icon",
+        href: arshPng,
+      },
       {
         rel: "stylesheet",
         href: appCss,
