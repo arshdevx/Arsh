@@ -536,12 +536,6 @@ function Index() {
       <main id="top" className="mx-auto max-w-6xl px-6">
         {/* ═══════ HERO ═══════ */}
         <section className="relative pt-2 pb-12 md:pt-4 md:pb-20 overflow-hidden">
-          {/* Grid background */}
-          <div
-            className="absolute inset-0 grid-pattern opacity-40 pointer-events-none"
-            style={{ maskImage: "linear-gradient(to bottom, transparent, black 30%, black 70%, transparent)" }}
-          />
-
           {/* Ambient floating orbs */}
           <AmbientOrbs />
 
